@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { RecipeProvider } from "./RecipeContext";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Home from "./Components/pages/Home.js";
+import RecipeDetails from "./Components/pages/RecipeDetails";
+import NavBar from "./Components/NavBar";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <RecipeProvider>
+      <Router>
+        <div className="App">
+          <NavBar />
+          <Switch>
+            <Route path="/" exact>
+              <Home />
+            </Route>
+            <Route path="/about">About</Route>
+            <Route path="/recipes/:recipeId">
+              <RecipeDetails />
+            </Route>
+          </Switch>
+          <div id="edamam-badge" data-color="white"></div>
+        </div>
+      </Router>
+    </RecipeProvider>
   );
 }
 
